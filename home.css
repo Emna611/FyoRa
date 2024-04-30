@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Styles pour la barre de menu (sidebar) */
+.sidebar {
+    width: 200px;
+    height: 100%;
+    background-color: #B0906E;
+    color: #fff;
+    position: fixed; /* La barre de menu restera fixe lors du défilement */
+    top: 0;
+    left: 0;
+}
+
+.sidebar nav {
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar li {
+    padding: 10px;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Styles pour le contenu principal */
+.main-content {
+    margin-left: 200px; /* Pour compenser la largeur de la barre de menu */
+}
+
+.container {
+    padding: 20px;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+input[type="text"] {
+    width: calc(100% - 70px);
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #B0906E;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    
+}
+
+button:hover {
+    background-color: #806447;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 3px;
+}
+.sidebar li:hover{
+    background-color: #806447;
+}
+
+.completed {
+    text-decoration: line-through;
+    cursor: pointer;
+}
+
+.category-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+#calendar {
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}

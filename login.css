@@ -1,0 +1,119 @@
+body {
+    font-family: sans-serif;
+    background-image: url('Images/black-background.jpg');
+    background-size: cover; /* Pour couvrir tout le contenu */
+    background-repeat: no-repeat; /* Pour éviter la répétition de l'image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .container {
+    width: 350px;
+    background-color: #B0906E;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 255);
+    
+  }
+  
+  .card {
+    padding: 20px;
+    
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: monospace, monospace; 
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    margin: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-family: monospace, monospace; 
+  }
+  
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e7b5b5;
+    border-radius: 3px;
+    font-family: monospace, monospace; 
+    border: none; /* Supprimer les bordures */
+    border-bottom: 1px solid #ccc; /* Ajouter une bordure en bas */
+    background-color: transparent; /* Fond transparent */
+    margin-right: 10px; /* Espacement entre les éléments */
+    margin-bottom: 20px;
+    
+  }
+  
+
+  input::placeholder{
+    color: #fff;
+    font-size: 10px;
+  }
+  
+  button {
+    background-color: #151317;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: monospace, monospace; 
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    width: 150px; /* Ajoutez une largeur fixe */
+    margin: 0 auto; /* Ajoutez une marge automatique pour centrer horizontalement */
+    margin: 50px auto 0 /* Ajoutez un espace en bas */
+  }
+  
+  
+  
+  button:hover {
+    background-color: #544636;;
+  }
+  
+  .forgot-password {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #fff;
+    font-family: monospace, monospace; 
+    font-size: 10px;
+    margin: 20px;
+  }
+
+  
+  /* input[type="password"] + .fa-eye {
+    position: absolute;
+    right: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  } */
+  .logo {
+    display: block;
+    margin: 0 auto;
+    width: 35px; /* Ajustez la taille du logo selon vos besoins */
+    margin-top: 10px; /* Ajustez l'espacement par rapport au titre */
+  }
+
+
+  
