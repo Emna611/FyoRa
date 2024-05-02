@@ -27,23 +27,27 @@
       
       </head>
 <body>
-    <section id="register" style="background-image: url('images/blog-lg2.jpg');">
+    <section id="register" style="background-image: url('images/backgroundlogin.png');">
         <div class="container ">
           <div class="row my-5 py-5">
             <div class="offset-md-3 col-md-6 my-5 ">
               <h2 class="display-3 fw-normal text-center">Get 20% Off on <span class="text-primary">first Purchase</span>
               </h2>
-              <form>
+              <form action="process-signup.php" method="post">
                 <div class="mb-3">
-                  <input type="email" class="form-control form-control-lg" name="email" id="email"
-                    placeholder="Enter Your Email Address">
+                  <input type="text" class="form-control form-control-lg" name="name" id="name"
+                    placeholder="Username"> 
                 </div>
                 <div class="mb-3">
-                  <input type="password" class="form-control form-control-lg" name="email" id="password1"
+                  <input type="email" class="form-control form-control-lg" name="email" id="email"
+                    placeholder="Enter your Email Address">
+                </div>
+                <div class="mb-3">
+                  <input type="password" class="form-control form-control-lg" name="password1" id="password1"
                     placeholder="Create Password">
                 </div>
                 <div class="mb-3">
-                  <input type="password" class="form-control form-control-lg" name="email" id="password2"
+                  <input type="password" class="form-control form-control-lg" name="password2" id="password2"
                     placeholder="Repeat Password">
                 </div>
     
