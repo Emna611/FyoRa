@@ -26,6 +26,9 @@ if ($_POST["password1"] !== $_POST["password2"]){
 
 $password_hash=password_hash($_POST["password1"],PASSWORD_DEFAULT);
 
+$mysqli = require __DIR__ . "/database.php";
+
+
 print_r($_POST); 
 var_dump($password_hash);//
 
