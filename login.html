@@ -33,7 +33,8 @@
             <div class="offset-md-3 col-md-6 my-5 ">
               <h2 class="display-3 fw-normal text-center">Get 20% Off on <span class="text-primary">first Purchase</span>
               </h2>
-              <form action="process-signup.php" method="post">
+              <form action="process-signup.php" method="post" novalidate >
+                <!-- novalidate : utilisé pour empêcher la validation des données d’un formulaire -->
                 <div class="mb-3">
                   <input type="text" class="form-control form-control-lg" name="name" id="name"
                     placeholder="Username"> 
