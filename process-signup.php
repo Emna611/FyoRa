@@ -28,9 +28,24 @@ $password_hash=password_hash($_POST["password1"],PASSWORD_DEFAULT);
 
 $mysqli = require __DIR__ . "/database.php";
 
+$sql ="INSERT INTO login_db (username, email, password_hash) VALUES ( ? , ? , ?)";
 
-print_r($_POST); 
-var_dump($password_hash);//
+$stmt = $mysqli->stmt_init();
+if(! $stmt->prepare($sql)) {
+die( "SQL error: ". $mysqli->error) ;
+}
+
+$stmt->bind_param( "sss" ,
+                    $_POST["name"],
+                    $_POST["email"],
+                    $password_hash);
+$stmt->execute();
+
+echo "Signup Successful";
+
+
+
+
 
 
 
