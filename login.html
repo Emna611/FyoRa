@@ -1,64 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Fyo-Ra</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="author" content="">
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-      </head>
-      
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-      
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-      
-      <link rel="stylesheet" type="text/css" href="css/vendor.css">
-      <link rel="stylesheet" type="text/css" href="style.css">
-      
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
-        rel="stylesheet">
-      
-      </head>
+<head>
+    <title>Fyo-Ra</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet">
+</head>
 <body>
-    <section id="register" style="background-image: url('images/backgroundlogin.png');">
-        <div class="container ">
-          <div class="row my-5 py-5">
-            <div class="offset-md-3 col-md-6 my-5 ">
-              <h2 class="display-3 fw-normal text-center">Get 20% Off on <span class="text-primary">first Purchase</span>
-              </h2>
-              <form action="process-signup.php" method="post" novalidate >
-                <!-- novalidate : utilisé pour empêcher la validation des données d’un formulaire -->
-                <div class="mb-3">
-                  <input type="text" class="form-control form-control-lg" name="name" id="name"
-                    placeholder="Username"> 
+    <section>
+        <div class="container">
+        
+            <div class="row my-5 py-5 align-items-center">
+                <div class="col-md-12">
+                    <div class="video">
+                        <video id="video" autoplay loop muted>
+                          <source src="images/page_sign_up.mp4" type="video/mp4" />
+                        </video>
+                    </div>
                 </div>
-                <div class="mb-3">
-                  <input type="email" class="form-control form-control-lg" name="email" id="email"
-                    placeholder="Enter your Email Address">
-                </div>
-                <div class="mb-3">
-                  <input type="password" class="form-control form-control-lg" name="password1" id="password1"
-                    placeholder="Create Password">
-                </div>
-                <div class="mb-3">
-                  <input type="password" class="form-control form-control-lg" name="password2" id="password2"
-                    placeholder="Repeat Password">
-                </div>
-    
-                <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-dark btn-lg rounded-1">Register it now</button>
-                </div>
-              </form>
             </div>
-          </div>
+           
+            <div class="row">
+                <div class="logo-par">
+                            
+                    <h1>Fyo-Ra</h1>
+                
+                </div>
+                <div class="offset-md-0 col-md-12">
+                    <br>
+                    <br>
+                    <br>
+
+                    
+                    <div class="offset-md-1 col-md-6 ">
+                        <div class="sign-up">
+                            <h1>Sign-Up</h1>
+                        </div>
+                       
+                        <form action="process-signup.php" method="post" novalidate>
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-control-lg" name="name" id="name"
+                                    placeholder="Username">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control form-control-lg" name="email" id="email"
+                                    placeholder="Enter your Email Address">
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control form-control-lg" name="password1" id="password1"
+                                    placeholder="Create Password">
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control form-control-lg" name="password2" id="password2"
+                                    placeholder="Repeat Password">
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-dark btn-lg rounded-1">Register it now</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </section>
+    </section>
 </body>
 </html>
