@@ -2,7 +2,7 @@
 
 
 $host = "localhost";
-$dbname ="fyorsa";
+$dbname ="fyora";
 $username = "root";
 $password = "";
 

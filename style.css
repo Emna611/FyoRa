@@ -729,5 +729,18 @@ video {
   }
 }
 
+.logo-par h1{
+  font-weight: bold; 
+    color: #DEAD6F;
+    font-size: 80px;
+}
+.sign-up {
+  text-align: center; 
+}
 
-
+.sign-up h1 {
+  margin-top: 20px;
+  margin-bottom: 20px; 
+  font-size: 50px;
+  
+}
