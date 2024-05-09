@@ -1,46 +1,92 @@
 <?php
-// Vérification des données reçues du formulaire
-if (empty($_POST["name"])) {
-    die("Name is required");
-}
 
-if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-    die("Valid email is required");
-}
+class SignupHandler {
+    private $pdo;
 
-if (strlen($_POST["password1"]) < 8) {
-    die("Password must be at least 8 characters");
-}
+    public function __construct(PDO $pdo) {
+        $this->pdo = $pdo;
+    }
 
-if (!preg_match("/[a-z]/i", $_POST["password1"])) {
-    die("Password must contain at least one letter");
-}
+    public function validateFormData($name, $email, $password1, $password2) {
+        if (empty($name)) {
+            return "Name is required";
+        }
 
-if (!preg_match("/[0-9]/", $_POST["password1"])) {
-    die("Password must contain at least one number");
-}
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return "Valid email is required";
+        }
 
-if ($_POST["password1"] !== $_POST["password2"]) {
-    die("Passwords must match");
-}
+        if (strlen($password1) < 8) {
+            return "Password must be at least 8 characters";
+        }
 
-// Hashage du mot de passe
-$password_hash = password_hash($_POST["password1"], PASSWORD_DEFAULT);
+        if (!preg_match("/[a-z]/i", $password1)) {
+            return "Password must contain at least one letter";
+        }
+
+        if (!preg_match("/[0-9]/", $password1)) {
+            return "Password must contain at least one number";
+        }
+
+        if ($password1 !== $password2) {
+            return "Passwords must match";
+        }
+
+        return true;
+    }
+
+    public function signup($name, $email, $password) {
+        try {
+            // Hashage du mot de passe
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+            // Préparation de la requête SQL
+            $sql = "INSERT INTO login_db (username, email, password_hash) VALUES (?, ?, ?)";
+            $stmt = $this->pdo->prepare($sql);
+
+            // Exécution de la requête en passant les valeurs via un tableau
+            if ($stmt->execute([$name, $email, $password_hash])) {
+                return "Signup Successful";
+            } else {
+                $errorCode = $stmt->errorCode();
+                if ($errorCode === '23000') {
+                    return "Email already taken";
+                } else {
+                    throw new Exception("Signup failed: " . $stmt->errorInfo()[2]);
+                }
+            }
+        } catch (PDOException $e) {
+            // Log the error
+            error_log("PDOException: " . $e->getMessage(), 0);
+            // Display a generic error message
+            return "An error occurred. Please try again later.";
+        }
+    }
+}
 
 // Inclusion du fichier de configuration de la base de données qui contient la connexion PDO
 require __DIR__ . "/database.php";
 
-try {
-    // Préparation de la requête SQL
-    $sql = "INSERT INTO login_db (username, email, password_hash) VALUES (?, ?, ?)";
-    $stmt = $pdo->prepare($sql);
+// Create an instance of the SignupHandler class
+$signupHandler = new SignupHandler($pdo);
 
-    // Exécution de la requête en passant les valeurs via un tableau
-    $stmt->execute([$_POST["name"], $_POST["email"], $password_hash]);
+// Vérification des données reçues du formulaire
+$validationResult = $signupHandler->validateFormData(
+    $_POST["name"],
+    $_POST["email"],
+    $_POST["password1"],
+    $_POST["password2"]
+);
 
-    echo "Signup Successful";
-} catch (PDOException $e) {
-    // Gestion des erreurs PDO
-    die("Error: " . $e->getMessage());
+if ($validationResult !== true) {
+    die($validationResult);
 }
+
+// Signup using the SignupHandler instance
+echo $signupHandler->signup(
+    $_POST["name"],
+    $_POST["email"],
+    $_POST["password1"]
+);
+
 ?>
