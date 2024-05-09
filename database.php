@@ -1,18 +1,18 @@
 <?php
 
-
 $host = "localhost";
-$dbname ="fyora";
+$dbname = "fyora";
 $username = "root";
 $password = "";
+$port = "3307"; 
 
-$mysqli= new mysqli(hostname: $host, 
-                    username: $username,
-                    password: $password,
-                    database: $dbname);
-
-if ($mysqli->connect_errno) {
-    die( "Connection error: " . $mysqli->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Erreur de connexion à la base de données : " . $e->getMessage();
+    exit;
 }
 
-return $mysqli;
+
+?>

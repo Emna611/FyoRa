@@ -53,30 +53,24 @@
                     <div class="offset-md-1 col-md-6 ">
                         <div class="sign-up">
                             <h5 style="color: #DEAD6F;">&#x1F5A4; Welcome Back &#x1F5A4;</h5>
-                            <h1>Please Sign Up</h1>
+                            <h1>Please Log In</h1>
                         </div><br>
+                        
                        
-                        <form action="process-signup.php" method="post" novalidate>
+                        <form action="process-login.php" method="post" novalidate>
                             <div class="mb-3">
-                                <input type="text" class="form-control form-control-lg" name="name" id="name"
-                                    placeholder="Username">
+                                <input type="email" class="form-control form-control-lg" name="email" id="email" placeholder="Enter your Email Address">
                             </div>
                             <div class="mb-3">
-                                <input type="email" class="form-control form-control-lg" name="email" id="email"
-                                    placeholder="Enter your Email Address">
+                                <input type="password" class="form-control form-control-lg" name="password1" id="password1" placeholder="Enter your Password">
                             </div>
-                            <div class="mb-3">
-                                <input type="password" class="form-control form-control-lg" name="password1" id="password1"
-                                    placeholder="Create Password">
-                            </div>
-                            <div class="mb-3">
-                                <input type="password" class="form-control form-control-lg" name="password2" id="password2"
-                                    placeholder="Repeat Password">
-                            </div>
-                   
+                            <br>
+                            <br>
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-dark btn-lg rounded-1">Register it now</button>
+                                <button type="submit" class="btn btn-dark btn-lg rounded-1">Login now</button>
                             </div>
+                        </form>
+                        
 
                         </form>
                     </div>
