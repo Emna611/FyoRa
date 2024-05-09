@@ -27,10 +27,13 @@
 <body>
     <section>
         <div class="container">
+            <div class="logo-par">
+                <h1>Fyo-Ra</h1>
+            </div>
         
             <div class="row my-5 py-5 align-items-center">
                 <div class="col-md-12">
-                    <div class="video">
+                    <div class="vd">
                         <video id="video" autoplay loop muted>
                           <source src="images/page_sign_up.mp4" type="video/mp4" />
                         </video>
@@ -38,39 +41,35 @@
                 </div>
             </div>
            
-            <div class="row">
-                <div class="logo-par">
-                            
-                    <h1>Fyo-Ra</h1>
+            <div class="rown">
                 
-                </div>
                 <div class="offset-md-0 col-md-12">
-                    <br>
-                    <br>
-                    <br>
-
-                    
-                    <div class="offset-md-1 col-md-6 ">
-                        <div class="sign-up">
-                            <h5 style="color: #DEAD6F;">&#x1F5A4; Welcome Back &#x1F5A4;</h5>
-                            <h1>Please Log In</h1>
-                        </div><br>
-                        
+                  <div class="offset-md-1 col-md-6 ">
+                        <div class="signup">
+                            <h1>Sign-Up</h1>
+                        </div>
                        
-                        <form action="process-login.php" method="post" novalidate>
+                        <form action="/signup/process-signup.php" method="post" novalidate>
                             <div class="mb-3">
-                                <input type="email" class="form-control form-control-lg" name="email" id="email" placeholder="Enter your Email Address">
+                                <input type="text" class="form-control form-control-lg" name="name" id="name"
+                                    placeholder="Username">
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control form-control-lg" name="password1" id="password1" placeholder="Enter your Password">
+                                <input type="email" class="form-control form-control-lg" name="email" id="email"
+                                    placeholder="Enter your Email Address">
                             </div>
-                            <br>
-                            <br>
+                            <div class="mb-3">
+                                <input type="password" class="form-control form-control-lg" name="password1" id="password1"
+                                    placeholder="Create Password">
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control form-control-lg" name="password2" id="password2"
+                                    placeholder="Repeat Password">
+                            </div>
+                   
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-dark btn-lg rounded-1">Login now</button>
+                                <button type="submit" class="btn btn-dark btn-lg rounded-1">Register it now</button>
                             </div>
-                        </form>
-                        
 
                         </form>
                     </div>
