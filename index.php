@@ -39,49 +39,50 @@
 
   
 
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
-    aria-labelledby="Search">
-    <div class="offcanvas-header justify-content-center">
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch" aria-labelledby="Search">
+        <div class="offcanvas-header justify-content-center">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="order-md-last">
+                <h4 class="text-primary text-uppercase mb-3">Search</h4>
+                <div class="search-bar border rounded-2 border-dark-subtle">
+                    <!-- Form for search in offcanvas -->
+                    <form id="search-form-offcanvas" class="text-center d-flex align-items-center" action="search.php" method="POST">
+                        <input id="search-input-offcanvas" type="text" class="form-control border-0 bg-transparent" placeholder="Search" name="search" />
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                    <!-- Display search results here -->
+                    <div id="search-results"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="offcanvas-body">
 
-      <div class="order-md-last">
-        <h4 class="text-primary text-uppercase mb-3">
-          Search
-        </h4>
-        <div class="search-bar border rounded-2 border-dark-subtle">
-          <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-            <input type="text" class="form-control border-0 bg-transparent" placeholder="Search Here" />
-            <iconify-icon icon="tabler:search" class="fs-4 me-3"></iconify-icon>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+    <!-- Header -->
+    <header>
+        <div class="container py-2">
+            <div class="row py-4 pb-0 pb-sm-4 align-items-center">
+                <div class="col-sm-4 col-lg-3 text-center text-sm-start">
+                    <div class="main-logo">
+                        <img src="images/Fyora.png" alt="logo" class="img-fluid" style="width: 150px;">
+                    </div>
+                </div>
 
-  <header>
-    <div class="container py-2">
-      <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
-
-        <div class="col-sm-4 col-lg-3 text-center text-sm-start">
-          <div class="main-logo">
-            <img src="images/Fyora.png" alt="logo" class="img-fluid" style="width: 150px;">
-          </div>
-        </div>
-
-        <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
-          <div class="search-bar border rounded-2 px-3 border-dark-subtle">
-            <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-              <input type="text" class="form-control border-0 bg-transparent"
-                placeholder="Search" />
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                  d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
-              </svg>
-            </form>
-          </div>
-        </div>
+                <!-- Formulaire de recherche dans la barre de navigation -->
+                <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
+                    <div class="search-bar border rounded-2 px-3 border-dark-subtle">
+                        <!-- Form for search in navigation bar -->
+                        <form id="search-form-navbar" class="text-center d-flex align-items-center" action="search.php" method="POST">
+                            <input type="text" class="form-control border-0 bg-transparent" placeholder="Search" name="search" />
+                            <button type="submit" class="" id="search-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
+                </svg>
+            </button>
+                        </form>
+                    </div>
+                </div>
 
         <div
           class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
@@ -148,13 +149,7 @@
           </div>
 
           <div class="offcanvas-body justify-content-between">
-            <select class="filter-categories border-0 mb-0 me-5">
-              <option>Shop by Category</option>
-              <option>Clothes</option>
-              <option>Food</option>
-              <option>Food</option>
-              <option>Toy</option>
-            </select>
+           
 
             <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
               <li class="nav-item">
@@ -279,12 +274,20 @@
   </section>
 
 
-
   <?php
-// Inclure la configuration de la base de données
+
+// index.php
+
+// Inclure le fichier de configuration de la base de données PDO
 include('database.php');
 
+// Créer une instance de la classe Database
+$database = new DatabaseConnection();
+
 try {
+    // Obtenir la connexion PDO en utilisant la méthode getConnection()
+    $pdo = $database->getConnection();
+
     // Requête SQL pour sélectionner les produits de la catégorie "Clothes"
     $sql = "SELECT * FROM products WHERE category = 'clothes'";
     $stmt = $pdo->query($sql);
@@ -320,9 +323,8 @@ try {
                                         <p><?php echo $row['description']; ?></p>
                                     </div>  
                                     <div class="d-flex flex-wrap mt-3">
-                                        <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                            <h5 class="text-uppercase m-0">Add to Cart</h5>
-                                        </a>
+                                        <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-primary me-3">Modifier</a>
+                                        <a href="delete-product.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Supprimer</a>
                                     </div>
                                 </div>
                             </div>
@@ -339,11 +341,18 @@ try {
 </section>
 
 
+
 <?php
 // Inclure la configuration de la base de données
 include('database.php');
 
 try {
+    // Créer une instance de la classe Database
+    $database = new DatabaseConnection();
+
+    // Obtenir la connexion PDO en utilisant la méthode getConnection()
+    $pdo = $database->getConnection();
+
     // Requête SQL pour sélectionner les produits de la catégorie "Food"
     $sql = "SELECT * FROM products WHERE category = 'food'";
     $stmt = $pdo->query($sql);
@@ -379,9 +388,12 @@ try {
                                         <p><?php echo $row['description']; ?></p>
                                     </div>  
                                     <div class="d-flex flex-wrap mt-3">
-                                        <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                            <h5 class="text-uppercase m-0">Add to Cart</h5>
-                                        </a>
+                                        <!-- Boutons Modifier et Supprimer -->
+                                        <div class="d-flex flex-wrap mt-3">
+                                        <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-primary me-3">Modifier</a>
+                                        <a href="delete-product.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Supprimer</a>
+                                  </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -848,6 +860,7 @@ try {
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="js/searchscript.js"></script>
 </body>
 
 </html>

@@ -215,6 +215,19 @@ body {
   --bs-gradient: none;
 }
 
+.btn-lg {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 0.3rem;
+}
+
+/* Style pour l'effet de survol rouge du bouton Supprimer */
+.delete-btn:hover {
+  background-color: #dc3545; /* Rouge */
+  border-color: #dc3545; /* Rouge */
+  color: #fff; /* Texte blanc */
+}
+
 .btn-dark {
   padding: 1.2rem 3rem;
   font-size: 1.1875rem;
