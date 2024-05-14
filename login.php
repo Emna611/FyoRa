@@ -1,3 +1,25 @@
+<?php
+session_start();
+$is_invalid = false;
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    require __DIR__ . "/database.php"; // Including your database connection file
+    
+    $stmt = $pdo->prepare("SELECT * FROM login_db WHERE email = ?");
+    $stmt->execute([$_POST["email"]]);
+    
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($user && password_verify($_POST["password"], $user["password_hash"])) {
+        $_SESSION["user_id"] = $user["ID"];
+        header("Location: index.php");
+        exit;
+    } else {
+        $is_invalid = true;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,47 +52,36 @@
             <div class="logo-par">
                 <h1>Fyo-Ra</h1>
             </div>
-        
             <div class="row my-5 py-5 align-items-center">
                 <div class="col-md-12">
                     <div class="vd">
                         <video id="video" autoplay loop muted>
-                          <source src="images/page_sign_up.mp4" type="video/mp4" />
+                            <source src="images/page_sign_up.mp4" type="video/mp4" />
                         </video>
                     </div>
                 </div>
             </div>
-           
             <div class="rown">
-                
                 <div class="offset-md-0 col-md-12">
-                  <div class="offset-md-1 col-md-6 ">
-                        <div class="signup">
-                            <h1>Sign-Up</h1>
-                        </div>
-                       
-                        <form action="/signup/process-signup.php" method="post" novalidate>
+                    <div class="offset-md-1 col-md-6 ">
+                        <div class="sign-up">
+                            <h5 style="color: #DEAD6F;">&#x1F5A4; Welcome Back &#x1F5A4;</h5>
+                            <h1>Please Log In</h1>
+                        </div><br>
+                        <form method="post">
                             <div class="mb-3">
-                                <input type="text" class="form-control form-control-lg" name="name" id="name"
-                                    placeholder="Username">
+                                <input type="email" class="form-control form-control-lg" name="email" id="email" value="<?= htmlspecialchars($_POST["email"] ?? "") ?>" placeholder="Enter your Email Address">
                             </div>
                             <div class="mb-3">
-                                <input type="email" class="form-control form-control-lg" name="email" id="email"
-                                    placeholder="Enter your Email Address">
+                                <input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Enter your Password">
                             </div>
-                            <div class="mb-3">
-                                <input type="password" class="form-control form-control-lg" name="password1" id="password1"
-                                    placeholder="Create Password">
-                            </div>
-                            <div class="mb-3">
-                                <input type="password" class="form-control form-control-lg" name="password2" id="password2"
-                                    placeholder="Repeat Password">
-                            </div>
-                   
+                            <br>
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-dark btn-lg rounded-1">Register it now</button>
+                                <?php if ($is_invalid):?>
+                                    <em style="color: red;">Invalid login</em>
+                                <?php endif;?>
+                                <button type="submit" class="btn btn-dark btn-lg rounded-1">Login now</button>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -79,4 +90,3 @@
     </section>
 </body>
 </html>
-

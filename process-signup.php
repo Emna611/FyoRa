@@ -46,10 +46,10 @@ class SignupHandler {
 
             // Exécution de la requête en passant les valeurs via un tableau
             if ($stmt->execute([$name, $email, $password_hash])) {
-                return "Signup Successful";
+                header( "Location: signup_success.html");
             } else {
                 $errorCode = $stmt->errorCode();
-                if ($errorCode === '23000') {
+                if ($errorCode === 23000) {
                     return "Email already taken";
                 } else {
                     throw new Exception("Signup failed: " . $stmt->errorInfo()[2]);
