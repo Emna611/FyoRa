@@ -1,3 +1,25 @@
+<?php
+require_once "controllerCpan.php";
+
+$panierC = new pani();
+$k=$panierC->count();
+
+
+if (isset($_POST["nom"], $_POST["price"],$_POST['image'])) {
+    if (!empty($_POST["nom"]) && !empty($_POST["price"]) && !empty($_POST["image"])) {
+        // Sanitize user input
+        $nom=$_POST['nom'];
+        $image = htmlspecialchars($_POST['image']);
+        $price = floatval($_POST['price']); // Assuming it's a numeric value
+        
+        // Create a panier object with the incremented id_C
+        $panier = new panie(null,$price,$nom,$image);
+
+        // Add the panier to the database
+        $panierC->addpanier($panier);
+    }
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -116,11 +138,11 @@
             </li>
 
             <li>
-              <a href="cart.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+              <a href="addtocart.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
                 aria-controls="offcanvasCart">
                 <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
                 <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                  03
+                  8
                 </span>
               </a>
             </li>
@@ -184,10 +206,11 @@
                 <li class="">
                   <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
                     aria-controls="offcanvasCart">
-                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                    <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                      03
-                    </span>
+                   <a href="panier.php"><iconify-icon href="panier.php" icon="mdi:cart" class="fs-4 position-relative"></iconify-icon></a> 
+                    <a href="panier.php"class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                      
+                    <?php echo $k ;?>
+                    </a>
                   </a>
                 </li>
               </ul>
@@ -301,36 +324,35 @@ try {
 
         <div class="products-carousel swiper">
             <div class="swiper-wrapper">
-                <?php
-                // Parcourir les résultats et afficher les produits
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                ?>
-                    <div class="swiper-slide">
-                        <div class="card position-relative">
-                            <a href="single-product.html"><img src="<?php echo $row['image']; ?>" class=" img-fluid rounded-4 " style="height: 200px; width: 250px" alt="image" ></a>
-                            <div class="card-body p-0">
-                                <a href="single-product.html">
-                                    <h3 class="card-title pt-4 m-0"><?php echo $row['name']; ?></h3>
-                                </a>
+            <form method="POST" action="#">
+    <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+        <div class="swiper-slide">
+            <div class="card position-relative">
+                <a href="" name="image"><img src="<?php echo $row['image']; ?>" class=" img-fluid rounded-4 " style="height: 200px; width: 250px" alt="image"></a>
+                <input type="hidden" name="image" value="<?php echo $row['image']; ?>">
+                <div class="card-body p-0">
+                    <a href="">
+                        <h3 class="card-title pt-4 m-0"><?php echo $row['name']; ?></h3>
+                        <input type="hidden" name="nom" value="<?php echo $row['name']; ?>">
+                    </a>
 
-                                <div class="card-text">
-                                    <h3 class="secondary-font text-primary"><?php echo $row['price']; ?> DT</h3>
-                                    <h4 class="secondary-font text-primary"><?php echo $row['category']; ?></h4>
-                                    <div class="d-flex flex-wrap mt-3">
-                                        <p><?php echo $row['description']; ?></p>
-                                    </div>  
-                                    <div class="d-flex flex-wrap mt-3">
-                                        <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                            <h5 class="text-uppercase m-0">Add to Cart</h5>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="card-text">
+                        <h3 class="secondary-font text-primary"><?php echo $row['price']; ?> DT</h3>
+                        <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
+                        <h4 class="secondary-font text-primary"><?php echo $row['category']; ?></h4>
+                        <div class="d-flex flex-wrap mt-3">
+                            <p><?php echo $row['description']; ?></p>
+                        </div>
+                        <div class="d-flex flex-wrap mt-3">
+                            <input type="submit" class="btn btn-cart me-3 px-4 pt-3 pb-3" value="Add to Cart">
                         </div>
                     </div>
-                <?php
-                }
-                ?>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+</form>
+
             </div>
         </div>
         <!-- / products-carousel -->
@@ -380,7 +402,9 @@ try {
                                     </div>  
                                     <div class="d-flex flex-wrap mt-3">
                                         <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                            <h5 class="text-uppercase m-0">Add to Cart</h5>
+                                        <div class="d-flex flex-wrap mt-3">
+                                          <input type="submit" class="btn btn-cart me-3 px-4 pt-3 pb-3" value="Add to Cart">
+                                        </div>
                                         </a>
                                     </div>
                                 </div>
@@ -826,6 +850,7 @@ try {
 
       </div>
     </div>
+    
   </footer>
 
   <div id="footer-bottom">
