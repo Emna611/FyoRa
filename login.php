@@ -11,9 +11,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if ($user && password_verify($_POST["password"], $user["password_hash"])) {
-        $_SESSION["user_id"] = $user["ID"];
-        header("Location: index.php");
-        exit;
+        // Check if the user is an admin
+        if ($_POST["userType"] == "admin" && $user["user_type"] == "admin") {
+            $_SESSION["user_id"] = $user["ID"];
+            header("Location: admin_dashboard.php"); // Redirect to admin dashboard
+            exit;
+        } elseif ($_POST["userType"] == "user" && $user["user_type"] == "user") {
+            $_SESSION["user_id"] = $user["ID"];
+            header("Location: index.php"); // Redirect to user dashboard
+            exit;
+        } else {
+            $is_invalid = true;
+        }
     } else {
         $is_invalid = true;
     }
@@ -75,7 +84,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <div class="mb-3">
                                 <input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Enter your Password">
                             </div>
-                            <br>
+                            <fieldset>
+                                <h5>I'm a:</h5>
+                                <label for="userTypeUser">
+                                    <input type="radio" id="userTypeUser" name="userType" value="user" required>
+                                    User
+                                </label>
+                                |
+                                <label for="userTypeAdmin">
+                                    <input type="radio" id="userTypeAdmin" name="userType" value="admin" required>
+                                    Admin
+                                </label>
+                            </fieldset>
+                            
                             <div class="d-grid gap-2">
                                 <?php if ($is_invalid):?>
                                     <em style="color: red;">Invalid login</em>
@@ -83,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <button type="submit" class="btn btn-dark btn-lg rounded-1">Login now</button>
                             </div>
                         </form>
+                                
                     </div>
                 </div>
             </div>

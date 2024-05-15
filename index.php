@@ -114,7 +114,7 @@ if (isset($_SESSION["user_id"])) {
                       <p><a href="logout.php">Log out</a></p>
                       <?php else: ?>
                         <p><a href="login.php" style="color: #DEAD6F;">Log in</a> or 
-                         <a href="signup.php" style="color: #DEAD6F;">Sign up</a></p>
+                         <a href="signup.html" style="color: #DEAD6F;">Sign up</a></p>
 
                         <?php endif; ?>
                    

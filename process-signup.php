@@ -35,18 +35,18 @@ class SignupHandler {
         return true;
     }
 
-    public function signup($name, $email, $password) {
+    public function signup($name, $email, $password, $userType) {
         try {
             // Hashage du mot de passe
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
             // Préparation de la requête SQL
-            $sql = "INSERT INTO login_db (username, email, password_hash) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO login_db (username, email, password_hash, user_type) VALUES (?, ?, ?, ?)";
             $stmt = $this->pdo->prepare($sql);
 
             // Exécution de la requête en passant les valeurs via un tableau
-            if ($stmt->execute([$name, $email, $password_hash])) {
-                header( "Location: signup_success.html");
+            if ($stmt->execute([$name, $email, $password_hash, $userType])) {
+                header("Location: signup_success.html");
             } else {
                 $errorCode = $stmt->errorCode();
                 if ($errorCode === 23000) {
@@ -86,7 +86,8 @@ if ($validationResult !== true) {
 echo $signupHandler->signup(
     $_POST["name"],
     $_POST["email"],
-    $_POST["password1"]
+    $_POST["password1"],
+    ($_POST['userType'] == 'user') ? 'user' : 'admin' // Get user type from form
 );
 
 ?>

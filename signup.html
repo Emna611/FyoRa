@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,11 +68,22 @@
                                 <input type="password" class="form-control form-control-lg" name="password2" id="passwordd"
                                     placeholder="Repeat Password">
                             </div>
-                   
+                            <fieldset>
+                                <h5>I'm a:</h5>
+                                <label for="userTypeUser">
+                                    <input type="radio" id="userTypeUser" name="userType" value="user" required>
+                                    User
+                                </label>
+                                |
+                                <label for="userTypeAdmin">
+                                    <input type="radio" id="userTypeAdmin" name="userType" value="admin" required>
+                                    Admin
+                                </label>
+                            </fieldset>
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-dark btn-lg rounded-1">Register it now</button>
                             </div>
-
+                            
                         </form>
                     </div>
                 </div>
