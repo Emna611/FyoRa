@@ -44,29 +44,27 @@ if (isset($_SESSION["user_id"])) {
 
 <body>
 
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
-        aria-labelledby="Search">
-        <div class="offcanvas-header justify-content-center">
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="order-md-last">
-                <h4 class="text-primary text-uppercase mb-3">
-                    Search
-                </h4>
-                <div class="search-bar border rounded-2 border-dark-subtle">
-                    <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-                        <input type="text" class="form-control border-0 bg-transparent" placeholder="Search Here" />
-                        <iconify-icon icon="tabler:search" class="fs-4 me-3"></iconify-icon>
-                    </form>
-                </div>
-            </div>
-        </div>
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
+    aria-labelledby="Search">
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-   
-    <div class="preloader-wrapper">
-        <div class="preloader"></div>
+    <div class="offcanvas-body">
+
+      <div class="order-md-last">
+        <h4 class="text-primary text-uppercase mb-3">
+          Search
+        </h4>
+        <div class="search-bar border rounded-2 border-dark-subtle">
+          <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
+            <input type="text" class="form-control border-0 bg-transparent" placeholder="Search Here" />
+            <iconify-icon icon="tabler:search" class="fs-4 me-3"></iconify-icon>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
+
   <header>
     <div class="container py-2">
       <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
@@ -89,7 +87,7 @@ if (isset($_SESSION["user_id"])) {
             </form>
           </div>
         </div>
-        
+
         <div
         class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
         <div class="support-box text-end d-none d-xl-block">
@@ -174,13 +172,7 @@ if (isset($_SESSION["user_id"])) {
           </div>
 
           <div class="offcanvas-body justify-content-between">
-            <select class="filter-categories border-0 mb-0 me-5">
-              <option>Shop by Category</option>
-              <option>Clothes</option>
-              <option>Food</option>
-              <option>Food</option>
-              <option>Toy</option>
-            </select>
+           
 
             <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
               <li class="nav-item">
@@ -188,7 +180,7 @@ if (isset($_SESSION["user_id"])) {
               </li>
               
               <li class="nav-item">
-                <a href="shop.html" class="nav-link">Shop</a>
+                <a href="shop.php" class="nav-link">Shop</a>
               </li>
               <li class="nav-item">
                 <a href="contact.html" class="nav-link">Contact</a>
@@ -305,12 +297,20 @@ if (isset($_SESSION["user_id"])) {
   </section>
 
 
-
   <?php
-// Inclure la configuration de la base de données
+
+// index.php
+
+// Inclure le fichier de configuration de la base de données PDO
 include('database.php');
 
+// Créer une instance de la classe Database
+$database = new DatabaseConnection();
+
 try {
+    // Obtenir la connexion PDO en utilisant la méthode getConnection()
+    $pdo = $database->getConnection();
+
     // Requête SQL pour sélectionner les produits de la catégorie "Clothes"
     $sql = "SELECT * FROM products WHERE category = 'clothes'";
     $stmt = $pdo->query($sql);
@@ -346,9 +346,8 @@ try {
                                         <p><?php echo $row['description']; ?></p>
                                     </div>  
                                     <div class="d-flex flex-wrap mt-3">
-                                        <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                            <h5 class="text-uppercase m-0">Add to Cart</h5>
-                                        </a>
+                                        <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-primary me-3">Modifier</a>
+                                        <a href="delete-product.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Supprimer</a>
                                     </div>
                                 </div>
                             </div>
@@ -365,11 +364,18 @@ try {
 </section>
 
 
+
 <?php
 // Inclure la configuration de la base de données
 include('database.php');
 
 try {
+    // Créer une instance de la classe Database
+    $database = new DatabaseConnection();
+
+    // Obtenir la connexion PDO en utilisant la méthode getConnection()
+    $pdo = $database->getConnection();
+
     // Requête SQL pour sélectionner les produits de la catégorie "Food"
     $sql = "SELECT * FROM products WHERE category = 'food'";
     $stmt = $pdo->query($sql);
@@ -405,9 +411,12 @@ try {
                                         <p><?php echo $row['description']; ?></p>
                                     </div>  
                                     <div class="d-flex flex-wrap mt-3">
-                                        <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                            <h5 class="text-uppercase m-0">Add to Cart</h5>
-                                        </a>
+                                        <!-- Boutons Modifier et Supprimer -->
+                                        <div class="d-flex flex-wrap mt-3">
+                                        <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-primary me-3">Modifier</a>
+                                        <a href="delete-product.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Supprimer</a>
+                                  </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -874,6 +883,7 @@ try {
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="js/searchscript.js"></script>
 </body>
 
 </html>
