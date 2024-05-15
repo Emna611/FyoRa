@@ -5,6 +5,10 @@ $is_invalid = false;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require __DIR__ . "/database.php"; // Including your database connection file
     
+    // Instantiate DatabaseConnection to establish a database connection
+    $dbConnection = new DatabaseConnection();
+    $pdo = $dbConnection->getConnection(); // Get the PDO object
+    
     $stmt = $pdo->prepare("SELECT * FROM login_db WHERE email = ?");
     $stmt->execute([$_POST["email"]]);
     
@@ -28,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
