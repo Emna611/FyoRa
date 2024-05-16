@@ -3,8 +3,20 @@ session_start();
 $is_invalid = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    require __DIR__ . "/database.php"; // Including your database connection file
+    // Include your PDO database connection file
+    require_once __DIR__ . "/database.php";
+
+    // Create a new instance of the Database class to get the PDO connection object
+    $db = new Database();
+    $pdo = $db->getConnection();
+
+    // Debugging: Check if $pdo is an instance of PDO
+    if (!($pdo instanceof PDO)) {
+        die("Database connection error."); // Or handle the error appropriately
+    }
     
+
+
     $stmt = $pdo->prepare("SELECT * FROM login_db WHERE email = ?");
     $stmt->execute([$_POST["email"]]);
     
@@ -28,6 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">

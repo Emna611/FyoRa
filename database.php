@@ -1,20 +1,27 @@
 <?php
 
-$host = "localhost";
-$dbname = "fyora";
-$username = "root";
-$password = "";
+// Check if the Database class already exists
+if (!class_exists('Database')) {
 
-// Data Source Name 
-$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
+    class Database {
+        private $host = "localhost";
+        private $dbname = "fyora";
+        private $username = "root";
+        private $password = "";
 
-try {
-    $pdo = new PDO($dsn, $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Return the PDO connection object
-    return $pdo;
-} catch (PDOException $e) {
-    // In case of connection error, throw an exception
-    throw new PDOException("Erreur de connexion à la base de données : " . $e->getMessage());
+        public function getConnection() {
+            $dsn = "mysql:host=$this->host;dbname=$this->dbname;charset=utf8";
+
+            try {
+                $pdo = new PDO($dsn, $this->username, $this->password);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                return $pdo;
+            } catch (PDOException $e) {
+                throw new PDOException("Erreur de connexion à la base de données : " . $e->getMessage());
+            }
+        }
+    }
+
 }
+
 ?>

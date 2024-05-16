@@ -2,6 +2,10 @@
 // Include your PDO database connection file
 require_once __DIR__ . "/database.php";
 
+// Instantiate the Database class to get the PDO connection object
+$db = new Database();
+$pdo = $db->getConnection();
+
 // Initialize email availability flag
 $is_available = false;
 

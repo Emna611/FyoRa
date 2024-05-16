@@ -1,11 +1,13 @@
 <?php
-
 session_start();
 
-if (isset($_SESSION["user_id"])) {
-    // Include your database connection file
-    $pdo = require_once __DIR__ . "/database.php";
+// Include your database connection file and get the PDO object
+require_once __DIR__ . "/database.php";
+$db = new Database();
+$pdo = $db->getConnection();
 
+// Check if a user session is active
+if (isset($_SESSION["user_id"])) {
     // Prepare and execute the SQL query
     $sql = "SELECT * FROM login_db WHERE id = :user_id";
     $stmt = $pdo->prepare($sql);
@@ -14,8 +16,8 @@ if (isset($_SESSION["user_id"])) {
     // Fetch the user data
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

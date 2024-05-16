@@ -1,4 +1,6 @@
 <?php
+// Include your PDO database connection file
+require_once __DIR__ . "/database.php";
 
 class SignupHandler {
     private $pdo;
@@ -6,6 +8,7 @@ class SignupHandler {
     public function __construct(PDO $pdo) {
         $this->pdo = $pdo;
     }
+
 
     public function validateFormData($name, $email, $password1, $password2) {
         if (empty($name)) {
@@ -37,19 +40,20 @@ class SignupHandler {
 
     public function signup($name, $email, $password, $userType) {
         try {
-            // Hashage du mot de passe
+            // Hash the password
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-            // Préparation de la requête SQL
+            // Prepare SQL statement
             $sql = "INSERT INTO login_db (username, email, password_hash, user_type) VALUES (?, ?, ?, ?)";
             $stmt = $this->pdo->prepare($sql);
 
-            // Exécution de la requête en passant les valeurs via un tableau
+            // Execute the statement with parameter binding
             if ($stmt->execute([$name, $email, $password_hash, $userType])) {
                 header("Location: signup_success.html");
+                exit(); // Exit after redirect
             } else {
                 $errorCode = $stmt->errorCode();
-                if ($errorCode === 23000) {
+                if ($errorCode === 23000) { // Duplicate entry error code
                     return "Email already taken";
                 } else {
                     throw new Exception("Signup failed: " . $stmt->errorInfo()[2]);
@@ -63,31 +67,31 @@ class SignupHandler {
         }
     }
 }
+$pdo = new PDO("mysql:host=localhost;dbname=fyora;charset=utf8", "root", "");
 
-// Inclusion du fichier de configuration de la base de données qui contient la connexion PDO
-require __DIR__ . "/database.php";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Create an instance of the SignupHandler class with the PDO connection
+    $signupHandler = new SignupHandler($pdo);
 
-// Create an instance of the SignupHandler class
-$signupHandler = new SignupHandler($pdo);
+    // Validate form data
+    $validationResult = $signupHandler->validateFormData(
+        $_POST["name"],
+        $_POST["email"],
+        $_POST["password1"],
+        $_POST["password2"]
+    );
 
-// Vérification des données reçues du formulaire
-$validationResult = $signupHandler->validateFormData(
-    $_POST["name"],
-    $_POST["email"],
-    $_POST["password1"],
-    $_POST["password2"]
-);
+    // If validation fails, display error message and stop further execution
+    if ($validationResult !== true) {
+        die($validationResult);
+    }
 
-if ($validationResult !== true) {
-    die($validationResult);
+    // Sign up using the SignupHandler instance
+    echo $signupHandler->signup(
+        $_POST["name"],
+        $_POST["email"],
+        $_POST["password1"],
+        ($_POST['userType'] == 'user') ? 'user' : 'admin' // Get user type from form
+    );
 }
-
-// Signup using the SignupHandler instance
-echo $signupHandler->signup(
-    $_POST["name"],
-    $_POST["email"],
-    $_POST["password1"],
-    ($_POST['userType'] == 'user') ? 'user' : 'admin' // Get user type from form
-);
-
 ?>
