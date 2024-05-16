@@ -15,8 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Database connection error."); // Or handle the error appropriately
     }
     
+<<<<<<< HEAD
 
 
+=======
+    // Instantiate DatabaseConnection to establish a database connection
+    $dbConnection = new DatabaseConnection();
+    $pdo = $dbConnection->getConnection(); // Get the PDO object
+    
+>>>>>>> 06f31ff7d404d64caedd120240c8ead3dbae4954
     $stmt = $pdo->prepare("SELECT * FROM login_db WHERE email = ?");
     $stmt->execute([$_POST["email"]]);
     
@@ -42,8 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 06f31ff7d404d64caedd120240c8ead3dbae4954
 <!DOCTYPE html>
 <html lang="en">
 <head>

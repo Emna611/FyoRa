@@ -1,4 +1,7 @@
 <?php
+
+// process-addproduct.php
+
 // Inclure le fichier de configuration de la base de données PDO
 include('database.php');
 
@@ -18,6 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
 
     try {
+        // Créer une instance de la classe Database
+        $database = new DatabaseConnection();
+
+        // Obtenir la connexion PDO
+        $pdo = $database->getConnection(); // Utilisez cette ligne pour obtenir la connexion PDO
+
         // Préparer la requête SQL pour l'insertion
         $stmt = $pdo->prepare("INSERT INTO products (name, description, price, image, category) VALUES (?, ?, ?, ?, ?)"); 
 
@@ -32,11 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
 
         // Redirection vers une autre page après l'insertion
-        header("Location: index.php");
+        header("Location: indexAdmin.php");
         exit();
     } catch (PDOException $e) {
         // Gestion des erreurs PDO
         echo "Erreur: " . $e->getMessage();
     }
 }
+
 ?>

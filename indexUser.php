@@ -1,136 +1,115 @@
 <?php
-session_start();
+require_once "controllerCpan.php";
 
-// Include your database connection file and get the PDO object
-require_once __DIR__ . "/database.php";
-$db = new Database();
-$pdo = $db->getConnection();
+$panierC = new pani();
+$k=$panierC->count();
 
-// Check if a user session is active
-if (isset($_SESSION["user_id"])) {
-    // Prepare and execute the SQL query
-    $sql = "SELECT * FROM login_db WHERE id = :user_id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['user_id' => $_SESSION["user_id"]]);
 
-    // Fetch the user data
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-}
+if (isset($_POST["nom"], $_POST["price"],$_POST['image'])) {
+    if (!empty($_POST["nom"]) && !empty($_POST["price"]) && !empty($_POST["image"])) {
+        // Sanitize user input
+        $nom=$_POST['nom'];
+        $image = htmlspecialchars($_POST['image']);
+        $price = floatval($_POST['price']); // Assuming it's a numeric value
+        
+        // Create a panier object with the incremented id_C
+        $panier = new panie(null,$price,$nom,$image);
+
+        $panierC->addpanier($panier);
+    }
+  }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Fyo-Ra</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="author" content="">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
+  <title>Fyo-Ra</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/vendor.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
-        rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="css/vendor.css">
+<link rel="stylesheet" type="text/css" href="style.css"> 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
+  rel="stylesheet">
+  
 </head>
 
 <body>
 
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
-    aria-labelledby="Search">
-    <div class="offcanvas-header justify-content-center">
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
+  
 
-      <div class="order-md-last">
-        <h4 class="text-primary text-uppercase mb-3">
-          Search
-        </h4>
-        <div class="search-bar border rounded-2 border-dark-subtle">
-          <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-            <input type="text" class="form-control border-0 bg-transparent" placeholder="Search Here" />
-            <iconify-icon icon="tabler:search" class="fs-4 me-3"></iconify-icon>
-          </form>
-        </div>
-      </div>
+  <div class="preloader-wrapper">
+    <div class="preloader">
     </div>
   </div>
 
+  
+
+ 
+
   <header>
-    <div class="container py-2">
-      <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
+  <div class="container py-2">
+  <div class="row py-4 pb-0 pb-sm-4 align-items-center">
+    <div class="col-sm-4 col-lg-3 text-center text-sm-start">
+      <div class="main-logo">
+        <img src="images/Fyora.png" alt="logo" class="img-fluid" style="width: 150px;">
+      </div>
+    </div>
 
-        <div class="col-sm-4 col-lg-3 text-center text-sm-start">
-          <div class="main-logo">
-            <img src="images/Fyora.png" alt="logo" class="img-fluid" style="width: 150px;">
-          </div>
-        </div>
-
-        <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
-          <div class="search-bar border rounded-2 px-3 border-dark-subtle">
-            <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-              <input type="text" class="form-control border-0 bg-transparent"
-                placeholder="Search" />
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                  d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
-              </svg>
-            </form>
-          </div>
-        </div>
-
-        <div
-        class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
-        <div class="support-box text-end d-none d-xl-block">
-          <span class="fs-6 secondary-font text-muted">Phone</span>
-          <h5 class="mb-0">+216-27660987</h5>
-        </div>
-        
-        <div class="support-box text-end d-none d-xl-block">
-          <span class="fs-6 secondary-font text-muted">Email</span>
-          <h5 class="mb-0">Fyora@gmail.com</h5>
-        </div>
+    <div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 ms-auto">
+      <div class="support-box text-end d-none d-xl-block">
+        <span class="fs-6 secondary-font text-muted">Phone</span>
+        <h5 class="mb-0">+216-27660987</h5>
+      </div>
       
-        
-      </div>
-     <div class="d-none d-lg-flex align-items-end">
-              <ul class="d-flex justify-content-end list-unstyled m-0">
-              
-                  <a href="account.html" >
-                    <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                    <?php if (isset($user)): ?>
-                  <span class="fs-6 secondary-font text-muted" ><p style="color: #916743;">Welcome <?= htmlspecialchars($user["username"]) ?></p></span>
-                      <p><a href="logout.php">Log out</a></p>
-                      <?php else: ?>
-                        <p><a href="login.php" style="color: #DEAD6F;">Log in</a> or 
-                         <a href="signup.html" style="color: #DEAD6F;">Sign up</a></p>
-
-                        <?php endif; ?>
-                   
-                        
-                      </a>
-                  
-                            </ul>
-        </div>
+      <div class="support-box text-end d-none d-xl-block">
+        <span class="fs-6 secondary-font text-muted">Email</span>
+        <h5 class="mb-0">Fyora@gmail.com</h5>
       </div>
     </div>
-
-    <div class="container-fluid">
-      <hr class="m-0">
+    
+    <div class="d-none d-lg-flex align-items-end ms-auto">
+      <ul class="d-flex justify-content-end list-unstyled m-0">
+        <li>
+          <a href="account.html">
+            <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+            <?php if (isset($user)): ?>
+            <span class="fs-6 secondary-font text-muted">
+              <p style="color: #916743;">Welcome <?= htmlspecialchars($user["username"]) ?></p>
+            </span>
+            <p><a href="logout.php">Log out</a></p>
+            <?php else: ?>
+            <p><a href="login.php" style="color: #DEAD6F;">Log in</a> or 
+              <a href="signup.html" style="color: #DEAD6F;">Sign up</a>
+            </p>
+            <?php endif; ?>
+          </a>
+        </li>
+      </ul>
     </div>
+  </div>
+</div>
 
-    <div class="container">
+<div class="container-fluid">
+  <hr class="m-0">
+</div>
+
+<div class="container">
       <nav class="main-menu d-flex navbar navbar-expand-lg ">
 
         <div class="d-flex d-lg-none align-items-end mt-3">
@@ -187,18 +166,12 @@ if (isset($_SESSION["user_id"])) {
               <li class="nav-item">
                 <a href="contact.html" class="nav-link">Contact</a>
               </li>
-              <li class="nav-item">
-                <a href="addproduct.html" class="nav-link">Add product</a>
-              </li>
+             
             </ul>
 
             <div class="d-none d-lg-flex align-items-end">
               <ul class="d-flex justify-content-end list-unstyled m-0">
-                <li>
-                  <a href="account.html" class="mx-3">
-                    <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                  </a>
-                </li>
+               
                
 
                 <li class="">
@@ -224,8 +197,8 @@ if (isset($_SESSION["user_id"])) {
 
 
     </div>
-  </header>
 
+</header>
   <section id="banner" style="background: #F9F3EC;">
     <div class="container">
       <div class="swiper main-swiper">
@@ -241,7 +214,7 @@ if (isset($_SESSION["user_id"])) {
                 <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
                     pets</span>
                 </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                <a href="shop.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                   shop now
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
@@ -260,7 +233,7 @@ if (isset($_SESSION["user_id"])) {
                 <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
                     pets</span>
                 </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                <a href="shop.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                   shop now
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
@@ -298,6 +271,7 @@ if (isset($_SESSION["user_id"])) {
       </div>
     </div>
   </section>
+
 
 
   <?php
@@ -342,20 +316,6 @@ try {
                         <input type="hidden" name="nom" value="<?php echo $row['name']; ?>">
                     </a>
 
-<<<<<<< HEAD
-                                <div class="card-text">
-                                    <h3 class="secondary-font text-primary"><?php echo $row['price']; ?> DT</h3>
-                                    <h4 class="secondary-font text-primary"><?php echo $row['category']; ?></h4>
-                                    <div class="d-flex flex-wrap mt-3">
-                                        <p><?php echo $row['description']; ?></p>
-                                    </div>  
-                                    <div class="d-flex flex-wrap mt-3">
-                                        <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-primary me-3">Modifier</a>
-                                        <a href="delete-product.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Supprimer</a>
-                                    </div>
-                                </div>
-                            </div>
-=======
                     <div class="card-text">
                         <h3 class="secondary-font text-primary"><?php echo $row['price']; ?> DT</h3>
                         <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
@@ -365,7 +325,6 @@ try {
                         </div>
                         <div class="d-flex flex-wrap mt-3">
                             <input type="submit" class="btn btn-cart me-3 px-4 pt-3 pb-3" value="Add to Cart">
->>>>>>> thirdBranch
                         </div>
                     </div>
                 </div>
@@ -382,19 +341,21 @@ try {
 </section>
 
 
-
 <?php
-// Inclure la configuration de la base de données
+
+// index.php
+
+// Inclure le fichier de configuration de la base de données PDO
 include('database.php');
 
-try {
-    // Créer une instance de la classe Database
-    $database = new DatabaseConnection();
+// Créer une instance de la classe Database
+$database = new DatabaseConnection();
 
+try {
     // Obtenir la connexion PDO en utilisant la méthode getConnection()
     $pdo = $database->getConnection();
 
-    // Requête SQL pour sélectionner les produits de la catégorie "Food"
+    // Requête SQL pour sélectionner les produits de la catégorie "food"
     $sql = "SELECT * FROM products WHERE category = 'food'";
     $stmt = $pdo->query($sql);
 } catch (PDOException $e) {
@@ -429,20 +390,11 @@ try {
                                         <p><?php echo $row['description']; ?></p>
                                     </div>  
                                     <div class="d-flex flex-wrap mt-3">
-<<<<<<< HEAD
-                                        <!-- Boutons Modifier et Supprimer -->
-                                        <div class="d-flex flex-wrap mt-3">
-                                        <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-primary me-3">Modifier</a>
-                                        <a href="delete-product.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Supprimer</a>
-                                  </div>
-
-=======
                                         <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
                                         <div class="d-flex flex-wrap mt-3">
                                           <input type="submit" class="btn btn-cart me-3 px-4 pt-3 pb-3" value="Add to Cart">
                                         </div>
                                         </a>
->>>>>>> thirdBranch
                                     </div>
                                 </div>
                             </div>
@@ -910,7 +862,6 @@ try {
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  <script src="js/searchscript.js"></script>
 </body>
 
 </html>
