@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $editProduct->updateProduct($id, $name, $price, $description, $category, $_FILES['image']);
 
             // Redirection vers une autre page après la mise à jour
-            header("Location: index.php");
+            header("Location: indexAdmin.php");
             exit();
         } catch (Exception $e) {
             // Gérer les erreurs

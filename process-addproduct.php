@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
 
         // Redirection vers une autre page après l'insertion
-        header("Location: index.php");
+        header("Location: indexAdmin.php");
         exit();
     } catch (PDOException $e) {
         // Gestion des erreurs PDO

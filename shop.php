@@ -28,7 +28,7 @@
 <section id="clothing" class="my-5 overflow-hidden">
     <div class="container pb-5">
         <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
-        <a href="index.php" class=" btn-primary"><img src="images/icons8-gauche-50.png">       Retour à l'accueil</a>
+        <a href="indexUser.php" class=" btn-primary"><img src="images/icons8-gauche-50.png">       Retour à l'accueil</a>
         </div>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">

@@ -66,162 +66,102 @@ if (isset($_SESSION["user_id"])) {
   </div>
 
   <header>
-    <div class="container py-2">
-      <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
+  <div class="container py-2">
+  <div class="row py-4 pb-0 pb-sm-4 align-items-center">
+    <div class="col-sm-4 col-lg-3 text-center text-sm-start">
+      <div class="main-logo">
+        <img src="images/Fyora.png" alt="logo" class="img-fluid" style="width: 150px;">
+      </div>
+    </div>
 
-        <div class="col-sm-4 col-lg-3 text-center text-sm-start">
-          <div class="main-logo">
-            <img src="images/Fyora.png" alt="logo" class="img-fluid" style="width: 150px;">
-          </div>
-        </div>
-
-        <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
-          <div class="search-bar border rounded-2 px-3 border-dark-subtle">
-            <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-              <input type="text" class="form-control border-0 bg-transparent"
-                placeholder="Search" />
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                  d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
-              </svg>
-            </form>
-          </div>
-        </div>
-
-        <div
-        class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
-        <div class="support-box text-end d-none d-xl-block">
-          <span class="fs-6 secondary-font text-muted">Phone</span>
-          <h5 class="mb-0">+216-27660987</h5>
-        </div>
-        
-        <div class="support-box text-end d-none d-xl-block">
-          <span class="fs-6 secondary-font text-muted">Email</span>
-          <h5 class="mb-0">Fyora@gmail.com</h5>
-        </div>
+    <div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 ms-auto">
+      <div class="support-box text-end d-none d-xl-block">
+        <span class="fs-6 secondary-font text-muted">Phone</span>
+        <h5 class="mb-0">+216-27660987</h5>
+      </div>
       
-        
-      </div>
-     <div class="d-none d-lg-flex align-items-end">
-              <ul class="d-flex justify-content-end list-unstyled m-0">
-              
-                  <a href="account.html" >
-                    <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                    <?php if (isset($user)): ?>
-                  <span class="fs-6 secondary-font text-muted" ><p style="color: #916743;">Welcome <?= htmlspecialchars($user["username"]) ?></p></span>
-                      <p><a href="logout.php">Log out</a></p>
-                      <?php else: ?>
-                        <p><a href="login.php" style="color: #DEAD6F;">Log in</a> or 
-                         <a href="signup.html" style="color: #DEAD6F;">Sign up</a></p>
-
-                        <?php endif; ?>
-                   
-                        
-                      </a>
-                  
-                            </ul>
-        </div>
+      <div class="support-box text-end d-none d-xl-block">
+        <span class="fs-6 secondary-font text-muted">Email</span>
+        <h5 class="mb-0">Fyora@gmail.com</h5>
       </div>
     </div>
+    
+    <div class="d-none d-lg-flex align-items-end ms-auto">
+      <ul class="d-flex justify-content-end list-unstyled m-0">
+        <li>
+          <a href="account.html">
+            <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+            <?php if (isset($user)): ?>
+            <span class="fs-6 secondary-font text-muted">
+              <p style="color: #916743;">Welcome <?= htmlspecialchars($user["username"]) ?></p>
+            </span>
+            <p><a href="logout.php">Log out</a></p>
+            <?php else: ?>
+            <p><a href="login.php" style="color: #DEAD6F;">Log in</a> or 
+              <a href="signup.html" style="color: #DEAD6F;">Sign up</a>
+            </p>
+            <?php endif; ?>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-    <div class="container-fluid">
-      <hr class="m-0">
+<div class="container-fluid">
+  <hr class="m-0">
+</div>
+
+<div class="container">
+  <nav class="main-menu d-flex navbar navbar-expand-lg">
+    <div class="d-flex d-lg-none align-items-end mt-3">
+      <ul class="d-flex justify-content-end list-unstyled m-0">
+        <li>
+          <a href="account.html" class="mx-3">
+            <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+          </a>
+        </li>
+        <li>
+          <a href="cart.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+            <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
+            <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">03</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
+            <iconify-icon icon="tabler:search" class="fs-4"></iconify-icon>
+          </a>
+        </li>
+      </ul>
     </div>
 
-    <div class="container">
-      <nav class="main-menu d-flex navbar navbar-expand-lg ">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="d-flex d-lg-none align-items-end mt-3">
-          <ul class="d-flex justify-content-end list-unstyled m-0">
-            <li>
-              <a href="account.html" class="mx-3">
-                <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-              </a>
-            </li>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header justify-content-center">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
 
-            <li>
-              <a href="addtocart.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                aria-controls="offcanvasCart">
-                <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                  8
-                </span>
-              </a>
-            </li>
+      <div class="offcanvas-body justify-content-between">
+        <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link active">Home</a>
+          </li>
+         
+      
+          <li class="nav-item">
+            <a href="addproduct.html" class="nav-link">Add product</a>
+          </li>
+        </ul>
 
-            <li>
-              <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
-                aria-controls="offcanvasSearch">
-                <iconify-icon icon="tabler:search" class="fs-4"></iconify-icon>
-                </span>
-              </a>
-            </li>
-          </ul>
-
-        </div>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-          aria-controls="offcanvasNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-
-          <div class="offcanvas-header justify-content-center">
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-
-          <div class="offcanvas-body justify-content-between">
-           
-
-            <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
-              <li class="nav-item">
-                <a href="index.html" class="nav-link active">Home</a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="shop.php" class="nav-link">Shop</a>
-              </li>
-              <li class="nav-item">
-                <a href="contact.html" class="nav-link">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a href="addproduct.html" class="nav-link">Add product</a>
-              </li>
-            </ul>
-
-            <div class="d-none d-lg-flex align-items-end">
-              <ul class="d-flex justify-content-end list-unstyled m-0">
-                <li>
-                  <a href="account.html" class="mx-3">
-                    <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                  </a>
-                </li>
-               
-
-                <li class="">
-                  <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                    aria-controls="offcanvasCart">
-                   <a href="panier.php"><iconify-icon href="panier.php" icon="mdi:cart" class="fs-4 position-relative"></iconify-icon></a> 
-                    <a href="panier.php"class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                      
-                    <?php echo $k ;?>
-                    </a>
-                  </a>
-                </li>
-              </ul>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </nav>
-
-
-
+       
+      </div>
     </div>
+  </nav>
+</div>
+
   </header>
 
   <section id="banner" style="background: #F9F3EC;">
@@ -239,11 +179,7 @@ if (isset($_SESSION["user_id"])) {
                 <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
                     pets</span>
                 </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  shop now
-                  <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                    <use xlink:href="#arrow-right"></use>
-                  </svg></a>
+                
               </div>
 
             </div>
@@ -258,11 +194,7 @@ if (isset($_SESSION["user_id"])) {
                 <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
                     pets</span>
                 </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  shop now
-                  <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                    <use xlink:href="#arrow-right"></use>
-                  </svg></a>
+                
               </div>
 
             </div>
@@ -328,19 +260,18 @@ try {
 
         <div class="products-carousel swiper">
             <div class="swiper-wrapper">
-            <form method="POST" action="#">
-    <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-        <div class="swiper-slide">
-            <div class="card position-relative">
-                <a href="" name="image"><img src="<?php echo $row['image']; ?>" class=" img-fluid rounded-4 " style="height: 200px; width: 250px" alt="image"></a>
-                <input type="hidden" name="image" value="<?php echo $row['image']; ?>">
-                <div class="card-body p-0">
-                    <a href="">
-                        <h3 class="card-title pt-4 m-0"><?php echo $row['name']; ?></h3>
-                        <input type="hidden" name="nom" value="<?php echo $row['name']; ?>">
-                    </a>
+                <?php
+                // Parcourir les résultats et afficher les produits
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                ?>
+                    <div class="swiper-slide">
+                        <div class="card position-relative">
+                            <a href="single-product.html"><img src="<?php echo $row['image']; ?>" class=" img-fluid rounded-4 " style="height: 200px; width: 250px" alt="image" ></a>
+                            <div class="card-body p-0">
+                                <a href="single-product.html">
+                                    <h3 class="card-title pt-4 m-0"><?php echo $row['name']; ?></h3>
+                                </a>
 
-<<<<<<< HEAD
                                 <div class="card-text">
                                     <h3 class="secondary-font text-primary"><?php echo $row['price']; ?> DT</h3>
                                     <h4 class="secondary-font text-primary"><?php echo $row['category']; ?></h4>
@@ -353,25 +284,11 @@ try {
                                     </div>
                                 </div>
                             </div>
-=======
-                    <div class="card-text">
-                        <h3 class="secondary-font text-primary"><?php echo $row['price']; ?> DT</h3>
-                        <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
-                        <h4 class="secondary-font text-primary"><?php echo $row['category']; ?></h4>
-                        <div class="d-flex flex-wrap mt-3">
-                            <p><?php echo $row['description']; ?></p>
-                        </div>
-                        <div class="d-flex flex-wrap mt-3">
-                            <input type="submit" class="btn btn-cart me-3 px-4 pt-3 pb-3" value="Add to Cart">
->>>>>>> thirdBranch
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
-</form>
-
+                <?php
+                }
+                ?>
             </div>
         </div>
         <!-- / products-carousel -->
@@ -427,20 +344,12 @@ try {
                                         <p><?php echo $row['description']; ?></p>
                                     </div>  
                                     <div class="d-flex flex-wrap mt-3">
-<<<<<<< HEAD
                                         <!-- Boutons Modifier et Supprimer -->
                                         <div class="d-flex flex-wrap mt-3">
                                         <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-primary me-3">Modifier</a>
                                         <a href="delete-product.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Supprimer</a>
                                   </div>
 
-=======
-                                        <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                        <div class="d-flex flex-wrap mt-3">
-                                          <input type="submit" class="btn btn-cart me-3 px-4 pt-3 pb-3" value="Add to Cart">
-                                        </div>
-                                        </a>
->>>>>>> thirdBranch
                                     </div>
                                 </div>
                             </div>
@@ -468,11 +377,7 @@ try {
 
           <h2 class="banner-title display-1 fw-normal">Clearance sale !!!
           </h2>
-          <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-            shop now
-            <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-              <use xlink:href="#arrow-right"></use>
-            </svg></a>
+          
         </div>
 
       </div>
@@ -513,239 +418,11 @@ try {
 
   </section>
 
-  <section id="bestselling" class="my-5 overflow-hidden">
-    <div class="container py-5 mb-5">
-
-      <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
-        <h2 class="display-3 fw-normal">Best selling products</h2>
-        <div>
-          <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-            shop now
-            <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-              <use xlink:href="#arrow-right"></use>
-            </svg></a>
-        </div>
-      </div>
-
-      <div class=" swiper bestselling-swiper">
-        <div class="swiper-wrapper">
-
-          <div class="swiper-slide">
-           
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item5.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                  
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-         
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item6.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                 
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                  
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item7.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-           
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item8.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-          
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item3.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                 
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                  
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item4.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-               
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-      <!-- / category-carousel -->
-
-
-    </div>
-  </section>
-
+  
   
 
 
-  <section id="service">
-    <div class="container py-5 my-5">
-      <div class="row g-md-5 pt-4">
-        <div class="col-md-3 my-3">
-          <div class="card">
-            <div>
-              <iconify-icon class="service-icon text-primary" icon="la:shopping-cart"></iconify-icon>
-            </div>
-            <h3 class="card-title py-2 m-0">Free Delivery</h3>
-            
-          </div>
-        </div>
-        <div class="col-md-3 my-3">
-          <div class="card">
-            <div>
-              <iconify-icon class="service-icon text-primary" icon="la:user-check"></iconify-icon>
-            </div>
-            <h3 class="card-title py-2 m-0">100% secure payment</h3>
-            
-          </div>
-        </div>
-        <div class="col-md-3 my-3">
-          <div class="card">
-            <div>
-              <iconify-icon class="service-icon text-primary" icon="la:tag"></iconify-icon>
-            </div>
-            <h3 class="card-title py-2 m-0">Daily Offer</h3>
-            
-          </div>
-        </div>
-        <div class="col-md-3 my-3">
-          <div class="card">
-            <div>
-              <iconify-icon class="service-icon text-primary" icon="la:award"></iconify-icon>
-            </div>
-            <h3 class="card-title py-2 m-0">Quality guarantee</h3>
-     
-          </div>
-        </div>
 
-      </div>
-    </div>
-  </section>
 
   <section id="insta" class="my-5">
     <div class="row g-0 py-5">
@@ -885,7 +562,6 @@ try {
 
       </div>
     </div>
-    
   </footer>
 
   <div id="footer-bottom">
