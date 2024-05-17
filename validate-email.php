@@ -3,7 +3,7 @@
 require_once __DIR__ . "/database.php";
 
 // Instantiate the Database class to get the PDO connection object
-$db = new Database();
+$db = new DatabaseConnection();
 $pdo = $db->getConnection();
 
 // Initialize email availability flag

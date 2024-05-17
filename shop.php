@@ -65,13 +65,13 @@
                                         <p><?php echo $row['description']; ?></p>
                                     </div>
                                     <div class="d-flex flex-wrap mt-3">
-                                        <a href="addtocart.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">Add to cart</a>
+                                        <a href="panier.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">Add to cart</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-            <?php
+            <?php   
                 }
             } catch (PDOException $e) {
                 // En cas d'erreur, afficher l'erreur

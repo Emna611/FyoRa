@@ -22,14 +22,13 @@ if (isset($_POST["nom"], $_POST["email"], $_POST["tel"], $_POST["adress"])) {
 
 <html lang="fr" class="supernova "><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="alternate" type="application/json+oembed" href="https://www.jotform.com/oembed/?format=json&amp;url=https%3A%2F%2Fform.jotform.com%2F241296813417560" title="oEmbed Form">
-<link rel="alternate" type="text/xml+oembed" href="https://www.jotform.com/oembed/?format=xml&amp;url=https%3A%2F%2Fform.jotform.com%2F241296813417560" title="oEmbed Form">
+
 <meta property="og:title" content="Modèle Bon de Commande Produits">
 <meta property="og:url" content="https://form.jotform.com/241296813417560">
 <meta property="og:description" content="Please click the link to complete this form.">
 <meta name="slack-app-id" content="AHNMASS8M">
 <meta property="og:tel" content="https://cdn.jotfor.ms/assets/img/landing/opengraph.png">
-<link rel="shortcut icon" href="https://cdn.jotfor.ms/assets/img/favicons/favicon-2021-light%402x.png">
+
 <link rel="apple-touch-icon" href="https://cdn.jotfor.ms/assets/img/favicons/favicon-2021-light%402x.png">
 <script>
           var favicon = document.querySelector('link[rel="shortcut icon"]');
@@ -569,44 +568,7 @@ if (isset($_POST["nom"], $_POST["email"], $_POST["tel"], $_POST["adress"])) {
     /* Injected CSS Code */
 </style>
 
-<script src="https://cdn02.jotfor.ms/static/prototype.forms.js?v=3.3.53773" type="text/javascript"></script>
-<script src="https://cdn03.jotfor.ms/static/jotform.forms.js?v=3.3.53773" type="text/javascript"></script>
-<script src="https://cdn01.jotfor.ms/js/punycode-1.4.1.min.js?v=3.3.53773" type="text/javascript" defer=""></script>
-<script src="https://cdn02.jotfor.ms/js/vendor/maskedinput_5.0.9.min.js?v=3.3.53773" type="text/javascript"></script>
-<script src="https://cdn03.jotfor.ms/js/payments/paymentUtils.js?v=3.3.53773" type="text/javascript"></script>
-<script src="https://cdn01.jotfor.ms/js/payments/validategateways.js?v=3.3.53773" type="text/javascript"></script>
-<script src="https://cdn01.jotfor.ms/s/umd/c3c8457f6ac/for-form-branding-footer.js?v=3.3.53773" type="text/javascript" defer=""></script>
-<script src="https://cdn02.jotfor.ms/js/vendor/smoothscroll.min.js?v=3.3.53773" type="text/javascript"></script>
-<script src="https://cdn03.jotfor.ms/js/errorNavigation.js?v=3.3.53773" type="text/javascript"></script>
-<script type="text/javascript">	JotForm.newDefaultTheme = true;
-	JotForm.extendsNewTheme = false;
-	JotForm.singleProduct = false;
-	JotForm.newPaymentUIForNewCreatedForms = false;
-	JotForm.texts = {"confirmEmail":"E-mail does not match","pleaseWait":"Please wait...","validateEmail":"You need to validate this e-mail","confirmClearForm":"Are you sure you want to clear the form","lessThan":"Your score should be less than or equal to","incompleteFields":"There are incomplete required fields. Please complete them.","required":"This field is required.","requireOne":"At least one field required.","requireEveryRow":"Every row is required.","requireEveryCell":"Every cell is required.","email":"Enter a valid e-mail address","alphabetic":"This field can only contain letters","numeric":"This field can only contain numeric values","alphanumeric":"This field can only contain letters and numbers.","cyrillic":"This field can only contain cyrillic characters","url":"This field can only contain a valid URL","currency":"This field can only contain currency values.","fillMask":"Field value must fill mask.","uploadExtensions":"You can only upload following files:","noUploadExtensions":"File has no extension file type (e.g. .txt, .png, .jpeg)","uploadFilesize":"File size cannot be bigger than:","uploadFilesizemin":"File size cannot be smaller than:","gradingScoreError":"Score total should only be less than or equal to","inputCarretErrorA":"Input should not be less than the minimum value:","inputCarretErrorB":"Input should not be greater than the maximum value:","maxDigitsError":"The maximum digits allowed is","minCharactersError":"The number of characters should not be less than the minimum value:","maxCharactersError":"The number of characters should not be more than the maximum value:","freeEmailError":"Free email accounts are not allowed","minSelectionsError":"The minimum required number of selections is ","maxSelectionsError":"The maximum number of selections allowed is ","pastDatesDisallowed":"Date must not be in the past.","dateLimited":"This date is unavailable.","dateInvalid":"This date is not valid. The date format is {format}","dateInvalidSeparate":"This date is not valid. Enter a valid {element}.","ageVerificationError":"You must be older than {minAge} years old to submit this form.","multipleFileUploads_typeError":"{file} has invalid extension. Only {extensions} are allowed.","multipleFileUploads_sizeError":"{file} is too large, maximum file size is {sizeLimit}.","multipleFileUploads_minSizeError":"{file} is too small, minimum file size is {minSizeLimit}.","multipleFileUploads_emptyError":"{file} is empty, please select files again without it.","multipleFileUploads_uploadFailed":"File upload failed, please remove it and upload the file again.","multipleFileUploads_onLeave":"The files are being uploaded, if you leave now the upload will be cancelled.","multipleFileUploads_fileLimitError":"Only {fileLimit} file uploads allowed.","dragAndDropFilesHere_infoMessage":"Drag and drop files here","chooseAFile_infoMessage":"Choose a file","maxFileSize_infoMessage":"Max. file size","generalError":"There are errors on the form. Please fix them before continuing.","generalPageError":"There are errors on this page. Please fix them before continuing.","wordLimitError":"Too many words. The limit is","wordMinLimitError":"Too few words.  The minimum is","characterLimitError":"Too many Characters.  The limit is","characterMinLimitError":"Too few characters. The minimum is","ccInvalidNumber":"Credit Card Number is invalid.","ccInvalidCVC":"CVC number is invalid.","ccInvalidExpireDate":"Expire date is invalid.","ccInvalidExpireMonth":"Expiration month is invalid.","ccInvalidExpireYear":"Expiration year is invalid.","ccMissingDetails":"Please fill up the credit card details.","ccMissingProduct":"Please select at least one product.","ccMissingDonation":"Please enter numeric values for donation amount.","disallowDecimals":"Please enter a whole number.","restrictedDomain":"This domain is not allowed","ccDonationMinLimitError":"Minimum amount is {minAmount} {currency}","requiredLegend":"All fields marked with * are required and must be filled.","geoPermissionTitle":"Permission Denied","geoPermissionDesc":"Check your browser's privacy settings.","geoNotAvailableTitle":"Position Unavailable","geoNotAvailableDesc":"Location provider not available. Please enter the address manually.","geoTimeoutTitle":"Timeout","geoTimeoutDesc":"Please check your internet connection and try again.","selectedTime":"Selected Time","formerSelectedTime":"Former Time","cancelAppointment":"Cancel Appointment","cancelSelection":"Cancel Selection","noSlotsAvailable":"No slots available","slotUnavailable":"{time} on {date} has been selected is unavailable. Please select another slot.","multipleError":"There are {count} errors on this page. Please correct them before moving on.","oneError":"There is {count} error on this page. Please correct it before moving on.","doneMessage":"Well done! All errors are fixed.","invalidTime":"Enter a valid time","doneButton":"Done","reviewSubmitText":"Review and Submit","nextButtonText":"Next","prevButtonText":"Previous","seeErrorsButton":"See Errors","notEnoughStock":"Not enough stock for the current selection","notEnoughStock_remainedItems":"Not enough stock for the current selection ({count} items left)","soldOut":"Sold Out","justSoldOut":"Just Sold Out","selectionSoldOut":"Selection Sold Out","subProductItemsLeft":"({count} items left)","startButtonText":"START","submitButtonText":"Submit","submissionLimit":"Sorry! Only one entry is allowed. Multiple submissions are disabled for this form.","reviewBackText":"Back to Form","seeAllText":"See All","progressMiddleText":"of","fieldError":"field has an error.","error":"Error"};
-	JotForm.newPaymentUI = true;
-	JotForm.replaceTagTest = true;
 
-   JotForm.setConditions([{"action":[{"visibility":"ShowMultiple","id":"action_0_1604308251340","isError":false,"fields":["21","22","23"]}],"id":"1604308125524","index":"0","link":"Any","priority":"0","terms":[{"field":"15","operator":"equals","value":"Oui","id":"term_0_1604308251340","isError":false}],"type":"field"}]);	JotForm.submitError="jumpToFirstError";
-	window.addEventListener('DOMContentLoaded',function(){window.brandingFooter.init({"formID":241296813417560,"campaign":"powered_by_jotform_le","isCardForm":false,"isLegacyForm":true})});
-	JotForm.init(function(){
-	/*INIT-START*/
-      JotForm.setPhoneMaskingValidator( 'input_18_full', '\u0028\u0023\u0023\u0023\u0029 \u0023\u0023\u0023\u002d\u0023\u0023\u0023\u0023' );
-      productID = {"0":"input_20_1001","1":"input_20_1002","2":"input_20_1003"};
-      paymentType = "product";
-      JotForm.setCurrencyFormat('USD',true, 'point');
-      JotForm.totalCounter({"input_20_1001":{"email":"1","quantityField":"input_20_quantity_1001_0","custom_1":"input_20_custom_1001_1","custom_2":"input_20_custom_1001_2"},"input_20_1002":{"email":"1","quantityField":"input_20_quantity_1002_0","custom_1":"input_20_custom_1002_1","custom_2":"input_20_custom_1002_2"},"input_20_1003":{"email":"1","quantityField":"input_20_quantity_1003_0","custom_1":"input_20_custom_1003_1"}});
-      $$('.form-product-custom_quantity').each(function(el, i){el.observe('blur', function(){isNaN(this.value) || this.value < 1 ? this.value = '0' : this.value = parseInt(this.value)})});
-      $$('.form-product-custom_quantity').each(function(el, i){el.observe('focus', function(){this.value == 0 ? this.value = '' : this.value})});
-      JotForm.handleProductLightbox();
-      JotForm.setPhoneMaskingValidator( 'input_22_full', '\u0028\u0023\u0023\u0023\u0029 \u0023\u0023\u0023\u002d\u0023\u0023\u0023\u0023' );
-if (window.JotForm && JotForm.accessible) $('input_14').setAttribute('tabindex',0);
-      JotForm.alterTexts({"couponApply":"Appliquer","couponBlank":"Entrez un code coupon.","couponChange":"","couponEnter":"Entrez le code coupon","couponExpired":"Ce code de réduction a expiré, veuillez en choisir un autre.","couponInvalid":"Coupon is invalid.","couponValid":"Le code coupon est valide.","shippingShipping":"Livraison","taxTax":"Taxes","totalSubtotal":"Sous-total","totalTotal":"Total"}, true);
-	/*INIT-END*/
-	});
-
-   setTimeout(function() {
-JotForm.paymentExtrasOnTheFly([null,{"name":"bonDe","qid":"1","text":"Bon de Commande ","type":"control_head"},null,null,null,null,null,null,null,null,null,null,null,null,{"mde":"No","name":"demandesSupplementairesdemandes","qid":"14","text":"Demandes supplementairesDemandes supplementaires","type":"control_textarea","wysiwyg":"Disable"},{"name":"envoyerCadeau","qid":"15","text":"Envoyer Cadeau","type":"control_radio"},{"name":"nom","qid":"16","text":"Nom","type":"control_fullname"},{"name":"email","qid":"17","subLabel":"exemple@exemple.com","text":"Email","type":"control_email"},{"name":"numeroDe","qid":"18","text":"Numero de telephone","type":"control_phone"},{"name":"adresseDe","qid":"19","text":"Adresse de facturation","type":"control_address"},{"name":"mesProduits","qid":"20","text":"Mes produits","type":"control_payment"},{"name":"nom21","qid":"21","text":"Nom","type":"control_fullname"},{"name":"numeroDe22","qid":"22","text":"Numero de telephone","type":"control_phone"},{"name":"adresse","qid":"23","text":"Adresse","type":"control_address"},{"name":"soumission","qid":"24","text":"Soumission","type":"control_button"},null,null,{"name":"sautDe","qid":"27","text":"Saut de page","type":"control_pagebreak"}]);}, 20); 
-</script>
 </head>
 <body>
 <form method="POST" action="#">

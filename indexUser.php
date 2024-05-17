@@ -1,24 +1,48 @@
 <?php
+session_start(); // Start the session if not already started
+
+// Include the necessary files
+require_once __DIR__ . "/database.php";
 require_once "controllerCpan.php";
 
+// Create a database connection
+$db = new DatabaseConnection();
+$pdo = $db->getConnection();
+
+// Check if the user is logged in
+if (isset($_SESSION["user_id"])) {
+    // Prepare and execute the SQL query to fetch user data
+    $sql = "SELECT * FROM login_db WHERE id = :user_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['user_id' => $_SESSION["user_id"]]);
+
+    // Fetch the user data
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+// Create an instance of the shopping cart controller
 $panierC = new pani();
-$k=$panierC->count();
+$k = $panierC->count();
+// Check if form data is submitted to add an item to the cart
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nom"], $_POST["price"], $_POST["image"])) {
+    // Sanitize and validate input
+    $nom = htmlspecialchars($_POST["nom"]);
+    $price = floatval($_POST["price"]);
+    $image = htmlspecialchars($_POST["image"]);
 
+    if (!empty($nom) && $price > 0 && !empty($image)) {
+        // Create a panier object with the provided data
+        $panier = new panie(null, $price, $nom, $image);
 
-if (isset($_POST["nom"], $_POST["price"],$_POST['image'])) {
-    if (!empty($_POST["nom"]) && !empty($_POST["price"]) && !empty($_POST["image"])) {
-        // Sanitize user input
-        $nom=$_POST['nom'];
-        $image = htmlspecialchars($_POST['image']);
-        $price = floatval($_POST['price']); // Assuming it's a numeric value
-        
-        // Create a panier object with the incremented id_C
-        $panier = new panie(null,$price,$nom,$image);
-
+        // Add the item to the shopping cart
         $panierC->addpanier($panier);
+    } else {
+        // Handle validation errors or empty fields
+        // You may want to implement error handling here
     }
-  }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -174,16 +198,15 @@ if (isset($_POST["nom"], $_POST["price"],$_POST['image'])) {
                
                
 
-                <li class="">
-                  <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                    aria-controls="offcanvasCart">
-                   <a href="panier.php"><iconify-icon href="panier.php" icon="mdi:cart" class="fs-4 position-relative"></iconify-icon></a> 
-                    <a href="panier.php"class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                      
-                    <?php echo $k ;?>
-                    </a>
-                  </a>
-                </li>
+              <li class="">
+    <a href="panier.php" class="mx-3">
+        <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+            <?php echo $k; ?>
+        </span>
+    </a>
+</li>
+
               </ul>
 
             </div>
@@ -335,7 +358,7 @@ try {
 
             </div>
         </div>
-        <!-- / products-carousel -->
+ 
 
     </div>
 </section>
@@ -343,7 +366,7 @@ try {
 
 <?php
 
-// index.php
+
 
 // Inclure le fichier de configuration de la base de données PDO
 include('database.php');
@@ -355,7 +378,7 @@ try {
     // Obtenir la connexion PDO en utilisant la méthode getConnection()
     $pdo = $database->getConnection();
 
-    // Requête SQL pour sélectionner les produits de la catégorie "food"
+    // Requête SQL pour sélectionner les produits de la catégorie "Clothes"
     $sql = "SELECT * FROM products WHERE category = 'food'";
     $stmt = $pdo->query($sql);
 } catch (PDOException $e) {
@@ -364,45 +387,42 @@ try {
 ?>
 
 <section id="foodies" class="my-5 overflow-hidden">
-    <div class="container my-5 py-5">
+    <div class="container pb-5">
         <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
             <h2 class="display-3 fw-normal">Pet Foodies</h2>
         </div>
 
         <div class="products-carousel swiper">
             <div class="swiper-wrapper">
-                <?php
-                // Parcourir les résultats et afficher les produits
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                ?>
-                    <div class="swiper-slide">
-                        <div class="card position-relative">
-                            <a href="single-product.html"><img src="<?php echo $row['image']; ?>" class="img-fluid rounded-4" style="height: 200px; width: 250px" alt="image"></a>
-                            <div class="card-body p-0">
-                                <a href="single-product.html">
-                                    <h3 class="card-title pt-4 m-0"><?php echo $row['name']; ?></h3>
-                                </a>
+            <form method="POST" action="#">
+    <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+        <div class="swiper-slide">
+            <div class="card position-relative">
+                <a href="" name="image"><img src="<?php echo $row['image']; ?>" class=" img-fluid rounded-4 " style="height: 200px; width: 250px" alt="image"></a>
+                <input type="hidden" name="image" value="<?php echo $row['image']; ?>">
+                <div class="card-body p-0">
+                    <a href="">
+                        <h3 class="card-title pt-4 m-0"><?php echo $row['name']; ?></h3>
+                        <input type="hidden" name="nom" value="<?php echo $row['name']; ?>">
+                    </a>
 
-                                <div class="card-text">
-                                    <h3 class="secondary-font text-primary"><?php echo $row['price']; ?> DT</h3>
-                                    <h4 class="secondary-font text-primary"><?php echo $row['category']; ?></h4>
-                                    <div class="d-flex flex-wrap mt-3">
-                                        <p><?php echo $row['description']; ?></p>
-                                    </div>  
-                                    <div class="d-flex flex-wrap mt-3">
-                                        <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                        <div class="d-flex flex-wrap mt-3">
-                                          <input type="submit" class="btn btn-cart me-3 px-4 pt-3 pb-3" value="Add to Cart">
-                                        </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="card-text">
+                        <h3 class="secondary-font text-primary"><?php echo $row['price']; ?> DT</h3>
+                        <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
+                        <h4 class="secondary-font text-primary"><?php echo $row['category']; ?></h4>
+                        <div class="d-flex flex-wrap mt-3">
+                            <p><?php echo $row['description']; ?></p>
+                        </div>
+                        <div class="d-flex flex-wrap mt-3">
+                            <input type="submit" class="btn btn-cart me-3 px-4 pt-3 pb-3" value="Add to Cart">
                         </div>
                     </div>
-                <?php
-                }
-                ?>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+</form>
+
             </div>
         </div>
         <!-- / products-carousel -->

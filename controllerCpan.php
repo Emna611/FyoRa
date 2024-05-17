@@ -57,6 +57,7 @@ class pani {
               
         $db = config::getConnexion();
         try {
+            
             $query = $db->prepare($sql);
             $query->execute([
               

@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require_once __DIR__ . "/database.php";
 
     // Create a new instance of the Database class to get the PDO connection object
-    $db = new Database();
+    $db = new DatabaseConnection();
     $pdo = $db->getConnection();
 
     // Debugging: Check if $pdo is an instance of PDO
@@ -15,15 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Database connection error."); // Or handle the error appropriately
     }
     
-<<<<<<< HEAD
 
 
-=======
-    // Instantiate DatabaseConnection to establish a database connection
-    $dbConnection = new DatabaseConnection();
-    $pdo = $dbConnection->getConnection(); // Get the PDO object
-    
->>>>>>> 06f31ff7d404d64caedd120240c8ead3dbae4954
     $stmt = $pdo->prepare("SELECT * FROM login_db WHERE email = ?");
     $stmt->execute([$_POST["email"]]);
     
@@ -33,11 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Check if the user is an admin
         if ($_POST["userType"] == "admin" && $user["user_type"] == "admin") {
             $_SESSION["user_id"] = $user["ID"];
-            header("Location: admin_dashboard.php"); // Redirect to admin dashboard
+            header("Location: indexAdmin.php"); // Redirect to admin dashboard
             exit;
         } elseif ($_POST["userType"] == "user" && $user["user_type"] == "user") {
             $_SESSION["user_id"] = $user["ID"];
-            header("Location: index.php"); // Redirect to user dashboard
+            header("Location: indexUser.php"); // Redirect to user dashboard
             exit;
         } else {
             $is_invalid = true;
@@ -49,11 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 06f31ff7d404d64caedd120240c8ead3dbae4954
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,6 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <h5 style="color: #DEAD6F;">&#x1F5A4; Welcome Back &#x1F5A4;</h5>
                             <h1>Please Log In</h1>
                         </div><br>
+                            
                         <form method="post">
                             <div class="mb-3">
                                 <input type="email" class="form-control form-control-lg" name="email" id="email" value="<?= htmlspecialchars($_POST["email"] ?? "") ?>" placeholder="Enter your Email Address">
@@ -127,7 +118,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     <em style="color: red;">Invalid login</em>
                                 <?php endif;?>
                                 <button type="submit" class="btn btn-dark btn-lg rounded-1">Login now</button>
+                            
+                             
                             </div>
+                          <div>
+                          <a href="signup.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                                    Signup !
+                                </a>
+                          </div>
                         </form>
                                 
                     </div>
